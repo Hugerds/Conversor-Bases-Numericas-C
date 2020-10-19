@@ -148,7 +148,6 @@ void octalDecimal(long long int num) {
 void decimalOctal(long long int num) {
 	system("cls");
 	long long int novoNum=0, a=1, salvaNum=num;
-
     while (num!=0) {
         novoNum+=(num%8)*a;
         num/=8;
