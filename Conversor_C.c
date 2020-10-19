@@ -4,13 +4,18 @@
 #include <math.h>
 #include <string.h>
 
+void hexaOctal(long long int num) {
+	int numNovo[200], potencia2[200], numOrdenado[200], potencia2ordenado[200], vetMult[200];
+	long int numFinal, numSalvo=num;
+	int a, b, c;
+	printf("%X(16) = %o(8)",num, num);
+}
+
 void hexaDecimal(long long int num) {
 	int numNovo[200], potencia2[200], numOrdenado[200], potencia2ordenado[200], vetMult[200];
 	long int numFinal, numSalvo=num;
 	int a, b, c;
-	char numChar[50];
 	printf("%X(16) = %ld(10)",num, num);
-    
 }
 
 void decimalHexa(long long int num) {
@@ -285,7 +290,10 @@ void menu() {
 		decimalHexa(num);
 	}
 	else if(op==4){
+		system("cls");
 		hexaDecimal(num);
+		printf("\n");
+		hexaOctal(num);
 	}
 }
 
