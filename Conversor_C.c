@@ -32,18 +32,14 @@ void hexaDecimal(long long int num) {
 }
 
 void decimalHexa(long long int num) {
-	int a, ehDivisivel=0, deuZero=0, b;
+	int a=0, ehDivisivel=0, deuZero=0, b, c;
 	long long int salvaNum=num, aux, novoNum, numDiv;
-	int numNovo[50];
-	for(a=0;a<1000 || deuZero==1;a++) {
-		
-	}
-	printf("\n");
-	//printf("%lld(10) = ", salvaNum);
-	for(a=aux;a>=0;a--) {
-		printf("%d", numNovo[a]);
-	}
-	//printf("(8)");
+	int numOrdenado[50], numFinal[50];
+	char numChar[50];
+	printf("%lld(10) = ", salvaNum);
+	sprintf(numChar, "%x", num);
+	printf("%s", numChar);
+	printf("(16)");
 }
 
 void binarioOctal(long long int num) {
@@ -146,7 +142,6 @@ void octalDecimal(long long int num) {
 }
 
 void decimalOctal(long long int num) {
-	system("cls");
 	long long int novoNum=0, a=1, salvaNum=num;
     while (num!=0) {
         novoNum+=(num%8)*a;
@@ -291,7 +286,12 @@ void menu() {
 		}
 	}
 	else if (op==3) {
+		system("cls");
 		decimalOctal(num);
+		printf("\n");
+		decimalBinario(num);
+		printf("\n");
+		decimalHexa(num);
 	}
 	else {
 		
