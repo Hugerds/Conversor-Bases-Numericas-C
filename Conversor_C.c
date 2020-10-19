@@ -4,6 +4,74 @@
 #include <math.h>
 #include <string.h>
 
+void hexaDecimal(long long int num) {
+	int numNovo[200], potencia2[200], numOrdenado[200], potencia2ordenado[200], vetMult[200];
+	long int numFinal, numSalvo=num;
+	int a, b, c;
+	for(a=0;num>0;a++) {
+		numNovo[a] = num%10;
+		num/=10;
+		b=a;
+	}
+	for(a=0;a<=b;a++) {
+		potencia2[a] = pow(16, a);
+	}
+	for(a=b, c=0;a>=0;a--, c++) {
+		numOrdenado[c]=numNovo[a];
+	}
+	for(a=b, c=0;a>=0;a--, c++) {
+		potencia2ordenado[c]=potencia2[a];
+	}
+	for(a=0;a<=b;a++) {
+		vetMult[a] = potencia2ordenado[a]*numOrdenado[a];
+	}
+	for(a=0;a<=b;a++) {
+		numFinal+=vetMult[a];
+	}
+	printf("%ld(16) = %ld(10)",numSalvo, numFinal);
+}
+
+void decimalHexa(long long int num) {
+	int a, ehDivisivel=0, deuZero=0, b;
+	long long int salvaNum=num, aux, novoNum, numDiv;
+	int numNovo[50];
+	for(a=0;a<1000 || deuZero==1;a++) {
+		
+	}
+	printf("\n");
+	//printf("%lld(10) = ", salvaNum);
+	for(a=aux;a>=0;a--) {
+		printf("%d", numNovo[a]);
+	}
+	//printf("(8)");
+}
+
+void binarioOctal(long long int num) {
+	system("cls");
+	int numNovo[200], numOrdenado[200];
+	long int numFinal, numSalvo=num;
+	int a, b, c;
+	for(a=0;num>0;a++) {
+		numNovo[a] = num%10;
+		num/=10;
+		b=a;
+	}
+	for(a=b, c=0;a>=0;a--, c++) {
+		numOrdenado[c]=numNovo[a];
+	}
+	printf("\n");
+	for(a=0, c=0;a<=b, c<=b;a++) {
+		if(a==3) {
+			a==0;
+			c+=3;
+		}
+		if(numOrdenado[(a%3==0)+1]==0 && numOrdenado[(a%3==0)+1]==0 && numOrdenado[(a%3==0)+1]==0) {
+			printf("oieee");
+		}
+	}
+	printf("%ld(2) = (8)",numSalvo);
+}
+
 void octalBinario(long long int num) {
 	system("cls");
 	int numNovo[200], numOrdenado[200];
@@ -21,7 +89,10 @@ void octalBinario(long long int num) {
 	}
 	printf("%ld(08) = ",numSalvo);
 	for(a=0;a<=b;a++) {
-		if(numOrdenado[a]==1) {
+		if (numOrdenado[a]==0) {
+			printf("000");
+		}
+		else if(numOrdenado[a]==1) {
 			printf("001");
 		}
 		else if(numOrdenado[a]==2) {
@@ -75,18 +146,17 @@ void octalDecimal(long long int num) {
 }
 
 void decimalOctal(long long int num) {
-	int a, ehDivisivel=0, deuZero=0, b;
-	long long int salvaNum=num, aux, novoNum, numDiv;
-	int numNovo[50];
-	for(a=0;a<1000 || deuZero==1;a++) {
-		
-	}
-	printf("\n");
-	//printf("%lld(10) = ", salvaNum);
-	for(a=aux;a>=0;a--) {
-		printf("%d", numNovo[a]);
-	}
-	//printf("(8)");
+	system("cls");
+	long long int novoNum=0, a=1, salvaNum=num;
+
+    while (num!=0) {
+        novoNum+=(num%8)*a;
+        num/=8;
+        a*=10;
+    }
+    printf("%lld(10) = ", salvaNum);
+    printf("%lld", novoNum);
+    printf("(8)");
 }
 
 void decimalBinario(long long int num) {
@@ -218,11 +288,10 @@ void menu() {
 			menu();
 		}
 		else if(res0==1){
-			binarioDecimal(num);
+			binarioOctal(num);
 		}
 	}
 	else if (op==3) {
-		decimalBinario(num);
 		decimalOctal(num);
 	}
 	else {
