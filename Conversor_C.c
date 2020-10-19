@@ -4,11 +4,75 @@
 #include <math.h>
 #include <string.h>
 
+void hexaBinario(long long int num) {
+	int numNovo[200], numOrdenado[200];
+	char numCharOrdem[200], numChar[200];
+	long int numFinal, numSalvo=num;
+	int a, b, c;
+	strcpy(numChar, num);
+	printf("\n");
+	for(a=0;a<=b;a++) {
+		printf("%s", numChar[a]);
+	}
+	printf("%X(16) = ",numSalvo);
+	for(a=0;a<=b;a++) {
+		if (numCharOrdem[a]=='0') {
+			printf("0000");
+		}
+		else if(numCharOrdem[a]=='1') {
+			printf("0001");
+		}
+		else if(numCharOrdem[a]=='2') {
+			printf("0010");
+		}
+		else if(numCharOrdem[a]=='3') {
+			printf("0011");
+		}
+		else if(numCharOrdem[a]=='4') {
+			printf("0100");
+		}
+		else if(numCharOrdem[a]=='5') {
+			printf("0101");
+		}
+		else if(numCharOrdem[a]=='6') {
+			printf("0110");
+		}
+		else if(numCharOrdem[a]=='7') {
+			printf("0111");
+		}
+		else if(numCharOrdem[a]=='8') {
+			printf("1000");
+		}
+		else if(numCharOrdem[a]=='9') {
+			printf("1001");
+		}
+		else if(numCharOrdem[a]=='A') {
+			printf("1010");
+		}
+		else if(numCharOrdem[a]=='B') {
+			printf("1011");
+		}
+		else if(numCharOrdem[a]=='C') {
+			printf("1100");
+		}
+		else if(numCharOrdem[a]=='D') {
+			printf("1101");
+		}
+		else if(numCharOrdem[a]=='E') {
+			printf("1110");
+		}
+		else if(numCharOrdem[a]=='F') {
+			printf("1111");
+		}
+	}
+	printf("(02)");
+}
+
 void hexaOctal(long long int num) {
 	int numNovo[200], potencia2[200], numOrdenado[200], potencia2ordenado[200], vetMult[200];
 	long int numFinal, numSalvo=num;
 	int a, b, c;
-	printf("%X(16) = %o(8)",num, num);
+	printf("%X(16) = %o(8)",numSalvo, num);
 }
 
 void hexaDecimal(long long int num) {
@@ -294,6 +358,8 @@ void menu() {
 		hexaDecimal(num);
 		printf("\n");
 		hexaOctal(num);
+		printf("\n");
+		hexaBinario(num);
 	}
 }
 
