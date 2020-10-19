@@ -8,27 +8,9 @@ void hexaDecimal(long long int num) {
 	int numNovo[200], potencia2[200], numOrdenado[200], potencia2ordenado[200], vetMult[200];
 	long int numFinal, numSalvo=num;
 	int a, b, c;
-	for(a=0;num>0;a++) {
-		numNovo[a] = num%10;
-		num/=10;
-		b=a;
-	}
-	for(a=0;a<=b;a++) {
-		potencia2[a] = pow(16, a);
-	}
-	for(a=b, c=0;a>=0;a--, c++) {
-		numOrdenado[c]=numNovo[a];
-	}
-	for(a=b, c=0;a>=0;a--, c++) {
-		potencia2ordenado[c]=potencia2[a];
-	}
-	for(a=0;a<=b;a++) {
-		vetMult[a] = potencia2ordenado[a]*numOrdenado[a];
-	}
-	for(a=0;a<=b;a++) {
-		numFinal+=vetMult[a];
-	}
-	printf("%ld(16) = %ld(10)",numSalvo, numFinal);
+	char numChar[50];
+	printf("%X(16) = %ld(10)",num, num);
+    
 }
 
 void decimalHexa(long long int num) {
@@ -37,8 +19,7 @@ void decimalHexa(long long int num) {
 	int numOrdenado[50], numFinal[50];
 	char numChar[50];
 	printf("%lld(10) = ", salvaNum);
-	sprintf(numChar, "%x", num);
-	printf("%s", numChar);
+	printf("%X", num);
 	printf("(16)");
 }
 
@@ -57,13 +38,7 @@ void binarioOctal(long long int num) {
 	}
 	printf("\n");
 	for(a=0, c=0;a<=b, c<=b;a++) {
-		if(a==3) {
-			a==0;
-			c+=3;
-		}
-		if(numOrdenado[(a%3==0)+1]==0 && numOrdenado[(a%3==0)+1]==0 && numOrdenado[(a%3==0)+1]==0) {
-			printf("oieee");
-		}
+		
 	}
 	printf("%ld(2) = (8)",numSalvo);
 }
@@ -179,7 +154,6 @@ void decimalBinario(long long int num) {
 }
 
 void binarioDecimal(long long int num) {
-	system("cls");
 	int numNovo[200], potencia2[200], numOrdenado[200], potencia2ordenado[200], vetMult[200];
 	long int numFinal, numSalvo=num;
 	int a, b, c;
@@ -249,18 +223,30 @@ void menu() {
 	long long int num;
 	system("cls");
 	printf("Conversor de bases numéricas\n\n");
-	do {
-		printf("Insira o número que você deseja converter e em seguida a opção desejada (MAX 999999999999999)\nSeu número: ");
-		scanf("%lld", &num);
-	} while (num<0 || num>999999999999999);
-	system("cls");
-	printf("Seu número escolhido foi o %lld\n\n", num);
 	printf("Você deseja calcular:\n1-Número octal para todas as bases\n2-Número binário para todas as bases\n3-Número decimal para todas as bases\n4-Número hexadecimal para todas as bases\nSua opção: ");
 	do {
 		fflush(stdin);
 		scanf("%d", &op);
 		fflush(stdout);
 	} while(op<0 || op>4);
+	do {
+		if(op==4) {
+			fflush(stdin);
+			printf("Insira o número que você deseja converter \nSeu número: ");
+			scanf("%x", &num);
+			fflush(stdout);
+			printf("Seu número escolhido foi o %X\n\n", num);
+			system("pause");
+		}
+		else {
+			fflush(stdin);
+			printf("Insira o número que você deseja converter (MAX 999999999999999)\nSeu número: ");
+			scanf("%lld", &num);
+			fflush(stdout);
+			printf("Seu número escolhido foi o %lld\n\n", num);
+		system("pause");
+		}
+	} while (num<0 || num>999999999999999);
 	if (op==1) {
 		int res8 = confereOito(num);
 		if(res8==0) {
@@ -270,7 +256,10 @@ void menu() {
 			menu();
 		}
 		else if(res8==1){
+			system("cls");
 			octalBinario(num);
+			printf("\n");
+			octalDecimal(num);
 		}
 	}
 	else if (op==2) {
@@ -283,6 +272,8 @@ void menu() {
 		}
 		else if(res0==1){
 			binarioOctal(num);
+			printf("\n");
+			binarioDecimal(num);
 		}
 	}
 	else if (op==3) {
@@ -293,8 +284,8 @@ void menu() {
 		printf("\n");
 		decimalHexa(num);
 	}
-	else {
-		
+	else if(op==4){
+		hexaDecimal(num);
 	}
 }
 
