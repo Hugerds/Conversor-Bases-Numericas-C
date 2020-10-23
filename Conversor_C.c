@@ -66,9 +66,63 @@ void hexaBinario(char num[]) {
 
 //REVISAR
 void hexaOctal(char num[]) {
-	int numNovo[200], potencia2[200], numOrdenado[200], potencia2ordenado[200], vetMult[200];
+	long long int numNovo[200], potencia2[200], numOrdenado[200], potencia2ordenado[200], vetMult[200], numInt[16];
 	long int numFinal;
-	int a, b, c;
+	int a, b=16, c;
+	for(a=0;a<=b;a++) {
+		if(num[a]=='0') {
+			numInt[a]=0;
+		}
+		else if(num[a]=='1') {
+			numInt[a]=1;
+		}
+		else if(num[a]=='2') {
+			numInt[a]=2;
+		}
+		else if(num[a]=='3') {
+			numInt[a]=3;
+		}
+		else if(num[a]=='4') {
+			numInt[a]=4;
+		}
+		else if(num[a]=='5') {
+			numInt[a]=5;
+		}
+		else if(num[a]=='6') {
+			numInt[a]=6;
+		}
+		else if(num[a]=='7') {
+			numInt[a]=7;
+		}
+		else if(num[a]=='8') {
+			numInt[a]=8;
+		}
+		else if(num[a]=='9') {
+			numInt[a]=9;
+		}
+		else if(toupper(num[a])=='A') {
+			numInt[a]=10;
+		}
+		else if(toupper(num[a])=='B') {
+			numInt[a]=11;
+		}
+		else if(toupper(num[a])=='C') {
+			numInt[a]=12;
+		}
+		else if(toupper(num[a])=='D') {
+			numInt[a]=13;
+		}
+		else if(toupper(num[a])=='E') {
+			numInt[a]=14;
+		}
+		else if(toupper(num[a])=='F') {
+			numInt[a]=15;
+		}
+		if(num[a]=='\0') {
+			b=a;
+			break;
+		}
+	}
 }
 
 void hexaDecimal(char num[]) {
@@ -144,73 +198,6 @@ void hexaDecimal(char num[]) {
 	printf("%s(16) = %ld(10)", num, numFinal);
 }
 
-void decimalHexa(long long int num) {
-	long long int novoNum=0, a=1, b=0, c=0, salvaNum=num;
-	int numOrdenado[20], numNovo[20], vetOrdenado[20];
-	char numFinal[20];
-	for(a=0;num>0;a++) {
-		//printf("%lld\n", (num%16));
-		numNovo[a] = (num%16);
-		num/=16;
-		b=a;
-	}
-    for(a=b, c=0;a>=0;a--, c++) {
-		vetOrdenado[c]=numNovo[a];
-	}
-	printf("%lld(10) = ", salvaNum);
-	for(a=0;a<=b;a++) {
-		if(vetOrdenado[a]==0) {
-			printf("%d", vetOrdenado[a]);
-		}
-		else if(vetOrdenado[a]==1) {
-			printf("%d", vetOrdenado[a]);
-		}
-		else if(vetOrdenado[a]==2) {
-			printf("%d", vetOrdenado[a]);
-		}
-		else if(vetOrdenado[a]==3) {
-			printf("%d", vetOrdenado[a]);
-		}
-		else if(vetOrdenado[a]==4) {
-			printf("%d", vetOrdenado[a]);
-		}
-		else if(vetOrdenado[a]==5) {
-			printf("%d", vetOrdenado[a]);
-		}
-		else if(vetOrdenado[a]==6) {
-			printf("%d", vetOrdenado[a]);
-		}
-		else if(vetOrdenado[a]==7) {
-			printf("%d", vetOrdenado[a]);
-		}
-		else if(vetOrdenado[a]==8) {
-			printf("%d", vetOrdenado[a]);
-		}
-		else if(vetOrdenado[a]==9) {
-			printf("%d", vetOrdenado[a]);
-		}
-		else if(vetOrdenado[a]==10) {
-			printf("A");
-		}
-		else if(vetOrdenado[a]==11) {
-			printf("B");
-		}
-		else if(vetOrdenado[a]==12) {
-			printf("C");
-		}
-		else if(vetOrdenado[a]==13) {
-			printf("D");
-		}
-		else if(vetOrdenado[a]==14) {
-			printf("E");
-		}
-		else if(vetOrdenado[a]==15) {
-			printf("F");
-		}
-	}
-	printf("(16)");
-}
-
 void binarioOctal(long long int num) {
 	long long int pNum = 0, c1 = 0, resto, numSalvo=num, numFinal = 0, c2 = 1;
     while (num != 0) {
@@ -226,6 +213,33 @@ void binarioOctal(long long int num) {
     }
     
 	printf("%lld(2) = %lld(8)",numSalvo, numFinal);
+}
+
+void binarioDecimal(long long int num) {
+	int numNovo[200], potencia2[200], numOrdenado[200], potencia2ordenado[200], vetMult[200];
+	long int numFinal, numSalvo=num;
+	int a, b, c;
+	for(a=0;num>0;a++) {
+		numNovo[a] = num%10;
+		num/=10;
+		b=a;
+	}
+	for(a=0;a<=b;a++) {
+		potencia2[a] = pow(2, a);
+	}
+	for(a=b, c=0;a>=0;a--, c++) {
+		numOrdenado[c]=numNovo[a];
+	}
+	for(a=b, c=0;a>=0;a--, c++) {
+		potencia2ordenado[c]=potencia2[a];
+	}
+	for(a=0;a<=b;a++) {
+		vetMult[a] = potencia2ordenado[a]*numOrdenado[a];
+	}
+	for(a=0;a<=b;a++) {
+		numFinal+=vetMult[a];
+	}
+	printf("%ld(2) = %ld(10)",numSalvo, numFinal);
 }
 
 void octalBinario(long long int num) {
@@ -341,31 +355,71 @@ void decimalBinario(long long int num) {
 	printf("(2)");
 }
 
-void binarioDecimal(long long int num) {
-	int numNovo[200], potencia2[200], numOrdenado[200], potencia2ordenado[200], vetMult[200];
-	long int numFinal, numSalvo=num;
-	int a, b, c;
+void decimalHexa(long long int num) {
+	long long int novoNum=0, a=1, b=0, c=0, salvaNum=num;
+	int numOrdenado[20], numNovo[20], vetOrdenado[20];
+	char numFinal[20];
 	for(a=0;num>0;a++) {
-		numNovo[a] = num%10;
-		num/=10;
+		//printf("%lld\n", (num%16));
+		numNovo[a] = (num%16);
+		num/=16;
 		b=a;
 	}
+    for(a=b, c=0;a>=0;a--, c++) {
+		vetOrdenado[c]=numNovo[a];
+	}
+	printf("%lld(10) = ", salvaNum);
 	for(a=0;a<=b;a++) {
-		potencia2[a] = pow(2, a);
+		if(vetOrdenado[a]==0) {
+			printf("%d", vetOrdenado[a]);
+		}
+		else if(vetOrdenado[a]==1) {
+			printf("%d", vetOrdenado[a]);
+		}
+		else if(vetOrdenado[a]==2) {
+			printf("%d", vetOrdenado[a]);
+		}
+		else if(vetOrdenado[a]==3) {
+			printf("%d", vetOrdenado[a]);
+		}
+		else if(vetOrdenado[a]==4) {
+			printf("%d", vetOrdenado[a]);
+		}
+		else if(vetOrdenado[a]==5) {
+			printf("%d", vetOrdenado[a]);
+		}
+		else if(vetOrdenado[a]==6) {
+			printf("%d", vetOrdenado[a]);
+		}
+		else if(vetOrdenado[a]==7) {
+			printf("%d", vetOrdenado[a]);
+		}
+		else if(vetOrdenado[a]==8) {
+			printf("%d", vetOrdenado[a]);
+		}
+		else if(vetOrdenado[a]==9) {
+			printf("%d", vetOrdenado[a]);
+		}
+		else if(vetOrdenado[a]==10) {
+			printf("A");
+		}
+		else if(vetOrdenado[a]==11) {
+			printf("B");
+		}
+		else if(vetOrdenado[a]==12) {
+			printf("C");
+		}
+		else if(vetOrdenado[a]==13) {
+			printf("D");
+		}
+		else if(vetOrdenado[a]==14) {
+			printf("E");
+		}
+		else if(vetOrdenado[a]==15) {
+			printf("F");
+		}
 	}
-	for(a=b, c=0;a>=0;a--, c++) {
-		numOrdenado[c]=numNovo[a];
-	}
-	for(a=b, c=0;a>=0;a--, c++) {
-		potencia2ordenado[c]=potencia2[a];
-	}
-	for(a=0;a<=b;a++) {
-		vetMult[a] = potencia2ordenado[a]*numOrdenado[a];
-	}
-	for(a=0;a<=b;a++) {
-		numFinal+=vetMult[a];
-	}
-	printf("%ld(2) = %ld(10)",numSalvo, numFinal);
+	printf("(16)");
 }
 
 int confereZeros(long long int num) {
