@@ -9,10 +9,17 @@ void hexaBinario(long long int num) {
 	char numCharOrdem[200], numChar[200];
 	long int numFinal, numSalvo=num;
 	int a, b, c;
-	strcpy(numChar, num);
+	for(a=0;num>0;a++) {
+		numChar[a] = num%10;
+		num/=10;
+		b=a;
+	}
 	printf("\n");
+	for(a=b, c=0;a>=0;a--, c++) {
+		numCharOrdem[c]=numChar[a];
+	}
 	for(a=0;a<=b;a++) {
-		printf("%s", numChar[a]);
+		printf("%s", numCharOrdem[a]);
 	}
 	printf("%X(16) = ",numSalvo);
 	for(a=0;a<=b;a++) {
