@@ -148,22 +148,15 @@ void decimalHexa(long long int num) {
 	int numOrdenado[20], numNovo[20], vetOrdenado[20];
 	char numFinal[20];
 	for(a=0;num>0;a++) {
-		printf("%lld\n", (num%16));
+		//printf("%lld\n", (num%16));
 		numNovo[a] = (num%16);
 		num/=16;
 		b=a;
 	}
-	for(a=0;a<=b;a++) {
-		printf("%d", numNovo[a]);
-	}
-	printf("\n");
     for(a=b, c=0;a>=0;a--, c++) {
 		vetOrdenado[c]=numNovo[a];
 	}
-	printf("\n");
-	for(a=0;a<=b;a++) {
-		printf("%d", vetOrdenado[a]);
-	}
+	printf("%lld(10) = ", salvaNum);
 	for(a=0;a<=b;a++) {
 		if(vetOrdenado[a]==0) {
 			printf("%d", vetOrdenado[a]);
@@ -214,18 +207,7 @@ void decimalHexa(long long int num) {
 			printf("F");
 		}
 	}
-	printf("\n");
-	/*
-	for(a=0;a<=b;a++) {
-		printf("%s", numFinal[a]);
-	}
-	*/
-	printf("\n");
-	printf("%lld(10) = ", salvaNum);
-	/*
-	printf("%lld", novoNum);
 	printf("(16)");
-	*/
 }
 
 //REVISAR
