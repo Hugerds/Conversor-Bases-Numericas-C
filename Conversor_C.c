@@ -3,6 +3,7 @@
 #include <string.h>
 #include <math.h>
 #include <string.h>
+#include <ctype.h>
 
 void hexaBinario(char num[]) {
 	int numNovo[200], numOrdenado[200];
@@ -41,22 +42,22 @@ void hexaBinario(char num[]) {
 		else if(num[a]=='9') {
 			printf("1001");
 		}
-		else if(num[a]=='A') {
+		else if(toupper(num[a])=='A') {
 			printf("1010");
 		}
-		else if(num[a]=='B') {
+		else if(toupper(num[a])=='B') {
 			printf("1011");
 		}
-		else if(num[a]=='C') {
+		else if(toupper(num[a])=='C') {
 			printf("1100");
 		}
-		else if(num[a]=='D') {
+		else if(toupper(num[a])=='D') {
 			printf("1101");
 		}
-		else if(num[a]=='E') {
+		else if(toupper(num[a])=='E') {
 			printf("1110");
 		}
-		else if(num[a]=='F') {
+		else if(toupper(num[a])=='F') {
 			printf("1111");
 		}
 	}
@@ -105,22 +106,22 @@ void hexaDecimal(char num[]) {
 		else if(num[a]=='9') {
 			numInt[a]=9;
 		}
-		else if(num[a]=='A') {
+		else if(toupper(num[a])=='A') {
 			numInt[a]=10;
 		}
-		else if(num[a]=='B') {
+		else if(toupper(num[a])=='B') {
 			numInt[a]=11;
 		}
-		else if(num[a]=='C') {
+		else if(toupper(num[a])=='C') {
 			numInt[a]=12;
 		}
-		else if(num[a]=='D') {
+		else if(toupper(num[a])=='D') {
 			numInt[a]=13;
 		}
-		else if(num[a]=='E') {
+		else if(toupper(num[a])=='E') {
 			numInt[a]=14;
 		}
-		else if(num[a]=='F') {
+		else if(toupper(num[a])=='F') {
 			numInt[a]=15;
 		}
 		if(num[a]=='\0') {
@@ -210,30 +211,21 @@ void decimalHexa(long long int num) {
 	printf("(16)");
 }
 
-//REVISAR
 void binarioOctal(long long int num) {
-	int numNovo[200], numOrdenado[200];
-	long int numFinal, numSalvo=num;
-	int a, b=0, c;
-	for(a=0;num>0;a++) {
-		numNovo[a] = num%10;
-		num/=10;
-		b=a;
-	}
-	for(a=b, c=0;a>=0;a--, c++) {
-		numOrdenado[c]=numNovo[a];
-	}
-	printf("%ld(2) = ",numSalvo);
-	for(a=0, c=0;a<=b, c<=b;a++) {
-		if(a==3) {
-			a==0;
-			c+=3;
-		}
-		if(numOrdenado[(a%3==0)+1]==0 && numOrdenado[(a%3==0)+1]==0 && numOrdenado[(a%3==0)+1]==0) {
-			printf("oieee");
-		}
-	}
-	printf("(8)");
+	long long int pNum = 0, c1 = 0, resto, numSalvo=num, numFinal = 0, c2 = 1;
+    while (num != 0) {
+        resto=num%10;
+        num/=10;
+        pNum+=resto*pow(2, c1);
+        ++c1;
+    }
+    while (pNum!=0) {
+        numFinal += (pNum % 8) * c2;
+        pNum /= 8;
+        c2 *= 10;
+    }
+    
+	printf("%lld(2) = %lld(8)",numSalvo, numFinal);
 }
 
 void octalBinario(long long int num) {
@@ -373,7 +365,7 @@ void binarioDecimal(long long int num) {
 	for(a=0;a<=b;a++) {
 		numFinal+=vetMult[a];
 	}
-	printf("%ld(10) = %ld(2)",numSalvo, numFinal);
+	printf("%ld(2) = %ld(10)",numSalvo, numFinal);
 }
 
 int confereZeros(long long int num) {
@@ -472,6 +464,7 @@ void menu() {
 			binarioOctal(num);
 			printf("\n");
 			binarioDecimal(num);
+			printf("\n");
 		}
 	}
 	else if (op==3) {
