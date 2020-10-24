@@ -172,13 +172,13 @@ void binarioHexa(long long int num) {
 	int numHexpossiveis[] = {0, 1, 10, 11, 100, 101, 110, 111, 1000, 1001, 1010, 1011, 1100, 1101, 1110, 1111};
     long long int salvaNum;
     char novoNum[20];
-    int aux, i, digit;
+    int aux, i, numSolo;
     salvaNum = num;
     aux = 0;
     while(salvaNum!=0) {
-        digit = salvaNum % 10000;
+        numSolo = salvaNum % 10000;
         for(i=0; i<16; i++) {
-            if(numHexpossiveis[i] == digit) {
+            if(numHexpossiveis[i] == numSolo) {
                 if(i<10) {
                     novoNum[aux] = (char)(i + 48);
                 }
@@ -211,7 +211,7 @@ void binarioOctal(long long int num) {
         c2 *= 10;
     }
     
-	printf("%lld(2) = %lld(8)",numSalvo, numFinal);
+	printf("%lld(02) = %lld(08)",numSalvo, numFinal);
 }
 
 void binarioDecimal(long long int num) {
@@ -239,7 +239,76 @@ void binarioDecimal(long long int num) {
 	for(a=0;a<=b;a++) {
 		numFinal+=vetMult[a];
 	}
-	printf("%lld(2) = %ld(10)",numSalvo, numFinal);
+	printf("%lld(02) = %ld(10)",numSalvo, numFinal);
+}
+
+void octalHexa(long long int num) {
+	int numOctpossiveis[] = {0, 1, 10, 11, 100, 101, 110, 111}, aux;
+    long long int salvaNum=num, numBin=0, a = 1;
+    char hex[65] = "";
+    while(salvaNum > 0) {
+        aux=salvaNum%10;
+        numBin = (numOctpossiveis[aux] * a) + numBin;
+        salvaNum /= 10;
+        a*=1000;
+    }
+    while(numBin > 0) {
+        aux = numBin % 10000;
+        switch(aux) {
+            case 0:
+                strcat(hex, "0");
+                break;
+            case 1:
+                strcat(hex, "1");
+                break;
+            case 10:
+                strcat(hex, "2");
+                break;
+            case 11:
+                strcat(hex, "3");
+                break;
+            case 100:
+                strcat(hex, "4");
+                break;
+            case 101:
+                strcat(hex, "5");
+                break;
+            case 110:
+                strcat(hex, "6");
+                break;
+            case 111:
+                strcat(hex, "7");
+                break;
+            case 1000:
+                strcat(hex, "8");
+                break;
+            case 1001:
+                strcat(hex, "9");
+                break;
+            case 1010:
+                strcat(hex, "A");
+                break;
+            case 1011:
+                strcat(hex, "B");
+                break;
+            case 1100:
+                strcat(hex, "C");
+                break;
+            case 1101:
+                strcat(hex, "D");
+                break;
+            case 1110:
+                strcat(hex, "E");
+                break;
+            case 1111:
+                strcat(hex, "F");
+            break;
+        }
+
+        numBin/=10000;
+    }
+    strrev(hex);
+    printf("%lld(08) = %s(16)", num, hex);
 }
 
 void octalBinario(long long int num) {
@@ -327,7 +396,7 @@ void decimalOctal(long long int num) {
     }
     printf("%lld(10) = ", salvaNum);
     printf("%lld", novoNum);
-    printf("(8)");
+    printf("(08)");
 }
 
 void decimalBinario(long long int num) {
@@ -352,7 +421,7 @@ void decimalBinario(long long int num) {
 	for(a=aux;a>=0;a--) {
 		printf("%d", numNovo[a]);
 	}
-	printf("(2)");
+	printf("(02)");
 }
 
 void decimalHexa(long long int num) {
@@ -461,7 +530,7 @@ int confereOito(long long int num) {
 }
 
 void menu() {
-	int op;
+	int op, op2;
 	long long int num;
 	char numChar[16];
 	system("cls");
@@ -487,7 +556,7 @@ void menu() {
 			scanf("%lld", &num);
 			fflush(stdout);
 			printf("Seu número escolhido foi o %lld\n\n", num);
-		system("pause");
+			system("pause");
 		}
 	} while (num<0 || num>999999999999999);
 	if (op==1) {
@@ -500,9 +569,25 @@ void menu() {
 		}
 		else if(res8==1){
 			system("cls");
+			printf("%lld(08) = %lld(08)", num, num);
+			printf("\n");
 			octalBinario(num);
 			printf("\n");
 			octalDecimal(num);
+			printf("\n");
+			octalHexa(num);
+			printf("\n");
+			system("pause");
+			do {
+				printf("\n\nDeseja usar o programa novamente?\n1- Sim\n2- Não\nSua opção: ");
+				scanf("%d", &op2);
+			} while(op2<=0 || op2>2);
+			if(op2==1) {
+				menu();
+			}
+			else {
+				system("exit");
+			}
 		}
 	}
 	else if (op==2) {
@@ -522,6 +607,18 @@ void menu() {
 			binarioDecimal(num);
 			printf("\n");
 			binarioHexa(num);
+			printf("\n");
+			system("pause");
+			do {
+				printf("\n\nDeseja usar o programa novamente?\n1- Sim\n2- Não\nSua opção: ");
+				scanf("%d", &op2);
+			} while(op2<=0 || op2>2);
+			if(op2==1) {
+				menu();
+			}
+			else {
+				system("exit");
+			}
 		}
 	}
 	else if (op==3) {
@@ -533,6 +630,18 @@ void menu() {
 		decimalBinario(num);
 		printf("\n");
 		decimalHexa(num);
+		printf("\n");
+		system("pause");
+			do {
+				printf("\n\nDeseja usar o programa novamente?\n1- Sim\n2- Não\nSua opção: ");
+				scanf("%d", &op2);
+			} while(op2<=0 || op2>2);
+			if(op2==1) {
+				menu();
+			}
+			else {
+				system("exit");
+			}
 	}
 	else if(op==4){
 		system("cls");
@@ -543,6 +652,18 @@ void menu() {
 		hexaOctal(numChar);
 		printf("\n");
 		hexaBinario(numChar);
+		printf("\n");
+		system("pause");
+			do {
+				printf("\n\nDeseja usar o programa novamente?\n1- Sim\n2- Não\nSua opção: ");
+				scanf("%d", &op2);
+			} while(op2<=0 || op2>2);
+			if(op2==1) {
+				menu();
+			}
+			else {
+				system("exit");
+			}
 	}
 }
 
