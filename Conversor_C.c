@@ -168,6 +168,35 @@ void hexaDecimal(char num[]) {
 	printf("%s(16) = %ld(10)", num, numFinal);
 }
 
+void binarioHexa(long long int num) {
+	int numHexpossiveis[] = {0, 1, 10, 11, 100, 101, 110, 111, 1000, 1001, 1010, 1011, 1100, 1101, 1110, 1111};
+    long long int salvaNum;
+    char novoNum[20];
+    int aux, i, digit;
+    salvaNum = num;
+    aux = 0;
+    while(salvaNum!=0) {
+        digit = salvaNum % 10000;
+        for(i=0; i<16; i++) {
+            if(numHexpossiveis[i] == digit) {
+                if(i<10) {
+                    novoNum[aux] = (char)(i + 48);
+                }
+                else {
+                    novoNum[aux] = (char)((i-10) + 65);
+                }
+                aux++;
+                break;
+            }
+        }
+        salvaNum/=10000;
+    }
+    novoNum[aux] = '\0';
+    strrev(novoNum);
+
+    printf("%lld(02) = %s(16)", num, novoNum);
+}
+
 void binarioOctal(long long int num) {
 	long long int pNum = 0, c1 = 0, resto, numSalvo=num, numFinal = 0, c2 = 1;
     while (num != 0) {
@@ -187,7 +216,8 @@ void binarioOctal(long long int num) {
 
 void binarioDecimal(long long int num) {
 	int numNovo[200], potencia2[200], numOrdenado[200], potencia2ordenado[200], vetMult[200];
-	long int numFinal, numSalvo=num;
+	long int numFinal;
+	long long int numSalvo=num;
 	int a, b, c;
 	for(a=0;num>0;a++) {
 		numNovo[a] = num%10;
@@ -209,7 +239,7 @@ void binarioDecimal(long long int num) {
 	for(a=0;a<=b;a++) {
 		numFinal+=vetMult[a];
 	}
-	printf("%ld(2) = %ld(10)",numSalvo, numFinal);
+	printf("%lld(2) = %ld(10)",numSalvo, numFinal);
 }
 
 void octalBinario(long long int num) {
@@ -485,10 +515,13 @@ void menu() {
 		}
 		else if(res0==1){
 			system("cls");
+			printf("%lld(02) = %lld(02)", num, num);
+			printf("\n");
 			binarioOctal(num);
 			printf("\n");
 			binarioDecimal(num);
 			printf("\n");
+			binarioHexa(num);
 		}
 	}
 	else if (op==3) {
