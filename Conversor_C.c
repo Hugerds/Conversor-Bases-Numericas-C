@@ -11,6 +11,12 @@ void hexaBinario(char num[]) {
 	long int numFinal;
 	int a, b, c;
 	printf("%s(16) = ",num);
+	for(a=0;a<=16;a++) {
+		if (num[a]=='\0') {
+			b=a;
+			break;
+		}
+	}
 	for(a=0;a<=b;a++) {
 		if (num[a]=='0') {
 			printf("0000");
@@ -64,65 +70,29 @@ void hexaBinario(char num[]) {
 	printf("(02)");
 }
 
-//REVISAR
 void hexaOctal(char num[]) {
-	long long int numNovo[200], potencia2[200], numOrdenado[200], potencia2ordenado[200], vetMult[200], numInt[16];
-	long int numFinal;
-	int a, b=16, c;
-	for(a=0;a<=b;a++) {
-		if(num[a]=='0') {
-			numInt[a]=0;
+	long long int a,tam, novoNum=0, octal=0;
+	char salvaNum[20];
+	strcpy(salvaNum, num);
+	for(tam=0; num[tam]!='\0'; tam++);
+	for(a=0; num[a]!='\0'; a++,tam--) {
+		if(num[a]>='0' && num[a]<='9') {
+			novoNum+=(num[a]-'0')*pow(16,tam-1);
 		}
-		else if(num[a]=='1') {
-			numInt[a]=1;
+		if(num[a]>='A' && num[a]<='F') {
+			novoNum+=(num[a]-55)*pow(16,tam-1);
 		}
-		else if(num[a]=='2') {
-			numInt[a]=2;
-		}
-		else if(num[a]=='3') {
-			numInt[a]=3;
-		}
-		else if(num[a]=='4') {
-			numInt[a]=4;
-		}
-		else if(num[a]=='5') {
-			numInt[a]=5;
-		}
-		else if(num[a]=='6') {
-			numInt[a]=6;
-		}
-		else if(num[a]=='7') {
-			numInt[a]=7;
-		}
-		else if(num[a]=='8') {
-			numInt[a]=8;
-		}
-		else if(num[a]=='9') {
-			numInt[a]=9;
-		}
-		else if(toupper(num[a])=='A') {
-			numInt[a]=10;
-		}
-		else if(toupper(num[a])=='B') {
-			numInt[a]=11;
-		}
-		else if(toupper(num[a])=='C') {
-			numInt[a]=12;
-		}
-		else if(toupper(num[a])=='D') {
-			numInt[a]=13;
-		}
-		else if(toupper(num[a])=='E') {
-			numInt[a]=14;
-		}
-		else if(toupper(num[a])=='F') {
-			numInt[a]=15;
-		}
-		if(num[a]=='\0') {
-			b=a;
-			break;
+		if(num[a]>='a' && num[a]<='f') {
+			novoNum+=(num[a]-87)*pow(16,tam-1);
 		}
 	}
+	a=1;
+	while(novoNum!=0) {
+		octal+=(novoNum%8)*a;
+		novoNum/=8;
+		a*=10;
+	}
+	printf("%s(16) = %lld(08)", salvaNum, octal);
 }
 
 void hexaDecimal(char num[]) {
@@ -533,9 +503,11 @@ void menu() {
 	}
 	else if(op==4){
 		system("cls");
+		printf("%s(16) = %s(16)", numChar, numChar);
+		printf("\n");
 		hexaDecimal(numChar);
-		//printf("\n");
-		//hexaOctal(num);
+		printf("\n");
+		hexaOctal(numChar);
 		printf("\n");
 		hexaBinario(numChar);
 	}
