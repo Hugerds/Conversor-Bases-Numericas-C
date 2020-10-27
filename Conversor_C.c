@@ -4,6 +4,41 @@
 #include <math.h>
 #include <string.h>
 #include <ctype.h>
+#include <windows.h>
+
+void gotoxy(int x, int y) {
+    HANDLE hCon;
+    COORD dwPos;
+
+    dwPos.X = x;
+    dwPos.Y = y;
+    hCon = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleCursorPosition(hCon,dwPos);
+}
+
+void carregamento() {
+	setlocale(LC_ALL, "C");
+	int i, j;
+   system ("cls");
+   gotoxy(15,8);printf ("\n\nCarregando: \n\n");          
+   for (i = 0; i <= 100; i++) {
+      printf ("  %d%%\r", i);
+      fflush (stdout);                      
+      for (j = 0; j < i; j++) {
+         if (!j)
+           printf ("  ");
+         printf ("%c", 219);
+         Sleep(0.9999999999999995);
+      }
+   }
+   printf ("\n\nAguarde...");
+   Sleep (1000);
+   gotoxy(15,17);printf ("APERTE QUALQUE TECLA PARA CONTINUAR\n\n\n");
+   getch();
+   fflush (stdin);
+   fflush (stdout);
+   setlocale(LC_ALL, "Portuguese");
+}
 
 void hexaBinario(char num[]) {
 	int numNovo[200], numOrdenado[200];
@@ -314,7 +349,7 @@ void octalHexa(long long int num) {
 void octalBinario(long long int num) {
 	int numNovo[200], numOrdenado[200];
 	char numCharOrdem[200];
-	long int numFinal, numSalvo=num;
+	long long int numFinal, numSalvo=num;
 	int a, b, c;
 	for(a=0;num>0;a++) {
 		numNovo[a] = num%10;
@@ -325,7 +360,7 @@ void octalBinario(long long int num) {
 		numOrdenado[c]=numNovo[a];
 		numCharOrdem[c]=numNovo[a];
 	}
-	printf("%ld(08) = ",numSalvo);
+	printf("%lld(08) = ",numSalvo);
 	for(a=0;a<=b;a++) {
 		if (numOrdenado[a]==0) {
 			printf("000");
@@ -356,8 +391,8 @@ void octalBinario(long long int num) {
 }
 
 void octalDecimal(long long int num) {
-	int numNovo[200], potencia2[200], numOrdenado[200], potencia2ordenado[200], vetMult[200];
-	long int numFinal, numSalvo=num;
+	long long int numNovo[200], potencia2[200], numOrdenado[200], potencia2ordenado[200], vetMult[200];
+	long long int numFinal, numSalvo=num;
 	int a, b, c;
 	for(a=0;num>0;a++) {
 		numNovo[a] = num%10;
@@ -380,10 +415,10 @@ void octalDecimal(long long int num) {
 		numFinal+=vetMult[a];
 	}
 	if (numFinal<10) {
-		printf("%ld(08) = 0%ld(10)",numSalvo, numFinal);
+		printf("%lld(08) = 0%lld(10)",numSalvo, numFinal);
 	}
 	else {
-		printf("%ld(08) = %ld(10)",numSalvo, numFinal);
+		printf("%lld(08) = %lld(10)",numSalvo, numFinal);
 	}	
 }
 
@@ -491,6 +526,124 @@ void decimalHexa(long long int num) {
 	printf("(16)");
 }
 
+int confereHexa(char num[]) {
+	int a, b, res;
+	int numInt[20];
+	for(a=0;a<=16;a++) {
+		if (num[a]=='\0') {
+			b=a;
+			break;
+		}
+	}
+	for(a=0;a<=b;a++) {
+		if(num[a]=='0') {
+			numInt[a]=0;
+		}
+		else if(num[a]=='1') {
+			numInt[a]=1;
+		}
+		else if(num[a]=='2') {
+			numInt[a]=2;
+		}
+		else if(num[a]=='3') {
+			numInt[a]=3;
+		}
+		else if(num[a]=='4') {
+			numInt[a]=4;
+		}
+		else if(num[a]=='5') {
+			numInt[a]=5;
+		}
+		else if(num[a]=='6') {
+			numInt[a]=6;
+		}
+		else if(num[a]=='7') {
+			numInt[a]=7;
+		}
+		else if(num[a]=='8') {
+			numInt[a]=8;
+		}
+		else if(num[a]=='9') {
+			numInt[a]=9;
+		}
+		else if(num[a]=='A') {
+			numInt[a]=10;
+		}
+		else if(num[a]=='B') {
+			numInt[a]=11;
+		}
+		else if(num[a]=='C') {
+			numInt[a]=12;
+		}
+		else if(num[a]=='D') {
+			numInt[a]=13;
+		}
+		else if(num[a]=='E') {
+			numInt[a]=14;
+		}
+		else if(num[a]=='F') {
+			numInt[a]=15;
+		}
+		else {
+			res=0;
+		}
+	}
+	for(a=b;a<=b;a++) {
+		if (numInt[a]=='0') {
+			res=1;
+		}
+		else if(numInt[a]==1) {
+			res=1;
+		}
+		else if(numInt[a]==2) {
+			res=1;
+		}
+		else if(numInt[a]==3) {
+			res=1;
+		}
+		else if(numInt[a]==4) {
+			res=1;
+		}
+		else if(numInt[a]==5) {
+			res=1;
+		}
+		else if(numInt[a]==6) {
+			res=1;
+		}
+		else if(numInt[a]==7) {
+			res=1;
+		}
+		else if(numInt[a]==8) {
+			res=1;
+		}
+		else if(numInt[a]==9) {
+			res=1;
+		}
+		else if(numInt[a]==10) {
+			res=1;
+		}
+		else if(numInt[a]==11) {
+			res=1;
+		}
+		else if(numInt[a]==12) {
+			res=1;
+		}
+		else if(numInt[a]==13) {
+			res=1;
+		}
+		else if(numInt[a]==14) {
+			res=1;
+		}
+		else if(numInt[a]==15) {
+			res=1;
+		}
+		else {
+			res=0;
+		}
+	}
+	return res;
+}
+
 int confereZeros(long long int num) {
 	int numNovo[200];
 	int a, b, res;
@@ -513,6 +666,9 @@ int confereZeros(long long int num) {
 int confereOito(long long int num) {
 	int numNovo[200];
 	int a, b, res;
+	if (num>777777777777777) {
+		res=0;
+	}
 	for(a=0;num>0;a++) {
 		numNovo[a] = num%10;
 		num/=10;
@@ -529,58 +685,111 @@ int confereOito(long long int num) {
 	return res;
 }
 
+void montaQuadrado() {
+	int a, x, y; // 45 LADO // 10 ALTURA
+	for(a=0, y=6;a<=7;a++,y++) {
+		gotoxy(17, y);
+		printf("|");
+	}
+	for(a=0, y=6;a<=7;a++,y++) {
+		gotoxy(59, y);
+		printf("|");
+	}
+	for(a=0, x=18;a<=40;a++,x++) {
+		gotoxy(x, 5);
+		printf("_");
+	}
+	for(a=0, x=18;a<=40;a++,x++) {
+		gotoxy(x, 13);
+		printf("_");
+	}
+}
+
+void montaMenu() {
+	int a, x, y; // 45 LADO // 10 ALTURA
+	for(a=0, y=1;a<17;a++,y++) {
+		gotoxy(17, y);
+		printf("|");
+	}
+	for(a=0, y=1;a<17;a++,y++) {
+		gotoxy(90, y);
+		printf("|");
+	}
+	for(a=0, x=18;a<=71;a++,x++) {
+		gotoxy(x, 0);
+		printf("_");
+	}
+	for(a=0, x=18;a<=71;a++,x++) {
+		gotoxy(x, 17);
+		printf("_");
+	}
+	gotoxy(20,3); printf("CONVERSOR DE BASES NUMÉRICAS");
+	gotoxy(20,5);  printf("Menu Principal");
+    gotoxy(20,7);  printf("1 - NÚMERO OCTAL PARA TODAS AS BASES");
+    gotoxy(20,8);  printf("2 - NÚMERO BINÁRIO PARA TODAS AS BASES");
+    gotoxy(20,9);  printf("3 - NÚMERO DECIMAL PARA TODAS AS BASES");
+    gotoxy(20,10); printf("4 - NÚMERO HEXADECIMAL PARA TODAS AS BASES");
+    gotoxy(20,20); printf("Desenvolvido por Hugo Esteves");
+}
+
 void menu() {
 	int op, op2;
 	long long int num;
 	char numChar[16];
 	system("cls");
-	printf("Conversor de bases numéricas\n\n");
-	printf("Você deseja calcular:\n1-Número octal para todas as bases\n2-Número binário para todas as bases\n3-Número decimal para todas as bases\n4-Número hexadecimal para todas as bases\nSua opção: ");
+	montaMenu();
 	do {
 		fflush(stdin);
+		gotoxy(20,12); printf("SUA OPÇÃO: ");
 		scanf("%d", &op);
 		fflush(stdout);
+		gotoxy(20,12); printf("SUA OPÇÃO:       ");
 	} while(op<0 || op>4);
 	do {
 		if(op==4) {
 			fflush(stdin);
-			printf("Insira o número que você deseja converter \nSeu número: ");
+			gotoxy(20, 13); printf("Insira o número que você deseja converter: ");
 			gets(numChar);
 			fflush(stdout);
-			printf("Seu número escolhido foi o %s\n\n", numChar);
-			system("pause");
+			gotoxy(20, 14); printf("Seu número escolhido foi o %s", numChar);
+			gotoxy(20, 15); system("pause");
 		}
 		else {
 			fflush(stdin);
-			printf("Insira o número que você deseja converter (MAX 999999999999999)\nSeu número: ");
+			gotoxy(20, 13); printf("Insira o número que você deseja converter (MAX 999999999999999): ");
 			scanf("%lld", &num);
 			fflush(stdout);
-			printf("Seu número escolhido foi o %lld\n\n", num);
-			system("pause");
+			gotoxy(20, 14); printf("Seu número escolhido foi o %lld", num);
+			gotoxy(20, 15); system("pause");
 		}
 	} while (num<0 || num>999999999999999);
 	if (op==1) {
 		int res8 = confereOito(num);
 		if(res8==0) {
+			carregamento();
 			system("cls");
 			printf("\nVocê inseriu um número octal inválido, voltando ao menu principal...\n");
 			system("pause");
 			menu();
 		}
 		else if(res8==1){
+			carregamento();
 			system("cls");
-			printf("%lld(08) = %lld(08)", num, num);
-			printf("\n");
-			octalBinario(num);
-			printf("\n");
-			octalDecimal(num);
-			printf("\n");
-			octalHexa(num);
-			printf("\n");
-			system("pause");
+			montaQuadrado();
+			gotoxy(20,7); printf("%lld(08) = %lld(08)", num, num);
+			gotoxy(20,8); octalBinario(num);
+			gotoxy(20,9); octalDecimal(num);
+			gotoxy(20,10); octalHexa(num);
+			gotoxy(20,12); system("pause");
 			do {
-				printf("\n\nDeseja usar o programa novamente?\n1- Sim\n2- Não\nSua opção: ");
-				scanf("%d", &op2);
+				system("cls");
+				montaQuadrado();
+				gotoxy(20,7); printf("Deseja usar o programa novamente?");
+				gotoxy(20,8); printf("1- Sim");
+				gotoxy(20,9); printf("2- Não");
+				gotoxy(20,10); printf("Sua opção: ");
+				gotoxy(31,10); scanf("%d", &op2);
+				getchar();
 			} while(op2<=0 || op2>2);
 			if(op2==1) {
 				menu();
@@ -593,25 +802,28 @@ void menu() {
 	else if (op==2) {
 		int res0 = confereZeros(num);
 		if(res0==0) {
+			carregamento();
 			system("cls");
 			printf("\nVocê inseriu um número binário inválido, voltando ao menu principal...\n");
 			system("pause");
 			menu();
 		}
 		else if(res0==1){
+			carregamento();
 			system("cls");
-			printf("%lld(02) = %lld(02)", num, num);
-			printf("\n");
-			binarioOctal(num);
-			printf("\n");
-			binarioDecimal(num);
-			printf("\n");
-			binarioHexa(num);
-			printf("\n");
-			system("pause");
+			gotoxy(20,7); printf("%lld(02) = %lld(02)", num, num);
+			gotoxy(20,8); binarioOctal(num);
+			gotoxy(20,9); binarioDecimal(num);
+			gotoxy(20,10); binarioHexa(num);
+			gotoxy(20,11); system("pause");
 			do {
-				printf("\n\nDeseja usar o programa novamente?\n1- Sim\n2- Não\nSua opção: ");
-				scanf("%d", &op2);
+				system("cls");
+				gotoxy(20,7); printf("Deseja usar o programa novamente?");
+				gotoxy(20,8); printf("1- Sim");
+				gotoxy(20,9); printf("2- Não");
+				gotoxy(20,10); printf("Sua opção: ");
+				gotoxy(31,10); scanf("%d", &op2);
+				getchar();
 			} while(op2<=0 || op2>2);
 			if(op2==1) {
 				menu();
@@ -622,41 +834,47 @@ void menu() {
 		}
 	}
 	else if (op==3) {
+		carregamento();
 		system("cls");
-		printf("%lld(10) = %lld(10)", num, num);
-		printf("\n");
-		decimalOctal(num);
-		printf("\n");
-		decimalBinario(num);
-		printf("\n");
-		decimalHexa(num);
-		printf("\n");
-		system("pause");
-			do {
-				printf("\n\nDeseja usar o programa novamente?\n1- Sim\n2- Não\nSua opção: ");
-				scanf("%d", &op2);
+		gotoxy(20,7); printf("%lld(10) = %lld(10)", num, num);
+		gotoxy(20,8); decimalOctal(num);
+		gotoxy(20,9); decimalBinario(num);
+		gotoxy(20,10); decimalHexa(num);
+		gotoxy(20,11); system("pause");
+		do {
+			system("cls");
+			gotoxy(20,7); printf("Deseja usar o programa novamente?");
+			gotoxy(20,8); printf("1- Sim");
+			gotoxy(20,9); printf("2- Não");
+			gotoxy(20,10); printf("Sua opção: ");
+			gotoxy(31,10); scanf("%d", &op2);
+			getchar();
 			} while(op2<=0 || op2>2);
-			if(op2==1) {
-				menu();
-			}
-			else {
-				system("exit");
-			}
+		if(op2==1) {
+			menu();
+		}
+		else {
+			system("exit");
+		}
 	}
 	else if(op==4){
-		system("cls");
-		printf("%s(16) = %s(16)", numChar, numChar);
-		printf("\n");
-		hexaDecimal(numChar);
-		printf("\n");
-		hexaOctal(numChar);
-		printf("\n");
-		hexaBinario(numChar);
-		printf("\n");
-		system("pause");
+		int res16 = confereHexa(numChar);
+		if (res16==1) {
+			carregamento();
+			system("cls");
+			gotoxy(20,7); printf("%s(16) = %s(16)", numChar, numChar);
+			gotoxy(20,8); hexaDecimal(numChar);
+			gotoxy(20,9); hexaOctal(numChar);
+			gotoxy(20,10); hexaBinario(numChar);
+			gotoxy(20,11); system("pause");
 			do {
-				printf("\n\nDeseja usar o programa novamente?\n1- Sim\n2- Não\nSua opção: ");
-				scanf("%d", &op2);
+				system("cls");
+				gotoxy(20,7); printf("Deseja usar o programa novamente?");
+				gotoxy(20,8); printf("1- Sim");
+				gotoxy(20,9); printf("2- Não");
+				gotoxy(20,10); printf("Sua opção: ");
+				gotoxy(31,10); scanf("%d", &op2);
+				getchar();
 			} while(op2<=0 || op2>2);
 			if(op2==1) {
 				menu();
@@ -664,6 +882,14 @@ void menu() {
 			else {
 				system("exit");
 			}
+		}
+		else {
+			carregamento();
+			system("cls");
+			printf("\nVocê inseriu um número hexadecimal inválido, voltando ao menu principal...\n");
+			system("pause");
+			menu();
+		}
 	}
 }
 
