@@ -566,26 +566,23 @@ int confereHexa(char num[]) {
 		else if(num[a]=='9') {
 			numInt[a]=9;
 		}
-		else if(num[a]=='A') {
+		else if(toupper(num[a])=='A') {
 			numInt[a]=10;
 		}
-		else if(num[a]=='B') {
+		else if(toupper(num[a])=='B') {
 			numInt[a]=11;
 		}
-		else if(num[a]=='C') {
+		else if(toupper(num[a])=='C') {
 			numInt[a]=12;
 		}
-		else if(num[a]=='D') {
+		else if(toupper(num[a])=='D') {
 			numInt[a]=13;
 		}
-		else if(num[a]=='E') {
+		else if(toupper(num[a])=='E') {
 			numInt[a]=14;
 		}
-		else if(num[a]=='F') {
+		else if(toupper(num[a])=='F') {
 			numInt[a]=15;
-		}
-		else {
-			res=0;
 		}
 	}
 	for(a=b;a<=b;a++) {
@@ -639,6 +636,7 @@ int confereHexa(char num[]) {
 		}
 		else {
 			res=0;
+			break;
 		}
 	}
 	return res;
@@ -811,6 +809,7 @@ void menu() {
 		else if(res0==1){
 			carregamento();
 			system("cls");
+			montaQuadrado();
 			gotoxy(20,7); printf("%lld(02) = %lld(02)", num, num);
 			gotoxy(20,8); binarioOctal(num);
 			gotoxy(20,9); binarioDecimal(num);
@@ -836,6 +835,7 @@ void menu() {
 	else if (op==3) {
 		carregamento();
 		system("cls");
+		montaQuadrado();
 		gotoxy(20,7); printf("%lld(10) = %lld(10)", num, num);
 		gotoxy(20,8); decimalOctal(num);
 		gotoxy(20,9); decimalBinario(num);
@@ -858,36 +858,25 @@ void menu() {
 		}
 	}
 	else if(op==4){
-		int res16 = confereHexa(numChar);
-		if (res16==1) {
-			carregamento();
+		//int res16 = confereHexa(numChar);
+		carregamento();
+		system("cls");
+		montaQuadrado();
+		gotoxy(20,7); printf("%s(16) = %s(16)", numChar, numChar);
+		gotoxy(20,8); hexaDecimal(numChar);
+		gotoxy(20,9); hexaOctal(numChar);
+		gotoxy(20,10); hexaBinario(numChar);
+		gotoxy(20,11); system("pause");
+		do {
 			system("cls");
-			gotoxy(20,7); printf("%s(16) = %s(16)", numChar, numChar);
-			gotoxy(20,8); hexaDecimal(numChar);
-			gotoxy(20,9); hexaOctal(numChar);
-			gotoxy(20,10); hexaBinario(numChar);
-			gotoxy(20,11); system("pause");
-			do {
-				system("cls");
-				gotoxy(20,7); printf("Deseja usar o programa novamente?");
-				gotoxy(20,8); printf("1- Sim");
-				gotoxy(20,9); printf("2- Não");
-				gotoxy(20,10); printf("Sua opção: ");
-				gotoxy(31,10); scanf("%d", &op2);
-				getchar();
-			} while(op2<=0 || op2>2);
-			if(op2==1) {
-				menu();
-			}
-			else {
-				system("exit");
-			}
-		}
-		else {
-			carregamento();
-			system("cls");
-			printf("\nVocê inseriu um número hexadecimal inválido, voltando ao menu principal...\n");
-			system("pause");
+			gotoxy(20,7); printf("Deseja usar o programa novamente?");
+			gotoxy(20,8); printf("1- Sim");
+			gotoxy(20,9); printf("2- Não");
+			gotoxy(20,10); printf("Sua opção: ");
+			gotoxy(31,10); scanf("%d", &op2);
+			getchar();
+		} while(op2<=0 || op2>2);
+		if(op2==1) {
 			menu();
 		}
 	}
