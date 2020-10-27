@@ -757,10 +757,10 @@ void menu() {
 		else {
 			fflush(stdin);
 			gotoxy(20, 13); printf("Insira o número que você deseja converter (MAX 999999999999999): ");
-			scanf("%lld", &num);
+			gotoxy(20, 14); printf("Sua opção: "); scanf("%lld", &num);
 			fflush(stdout);
-			gotoxy(20, 14); printf("Seu número escolhido foi o %lld", num);
-			gotoxy(20, 15); system("pause");
+			gotoxy(20, 15); printf("Seu número escolhido foi o %lld", num);
+			gotoxy(20, 16); system("pause");
 		}
 	} while (num<0 || num>999999999999999);
 	if (op==1) {
